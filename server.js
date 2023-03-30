@@ -6,15 +6,15 @@ app.use(express.json());
 
 app.post('/download', async (req, res) => {
     const { url } = req.body;
-
+    // const url = "https://www.youtube.com/watch?v=R4qud199tQk"
     console.log("Download Endpoint Called!")
+    console.log("URL: ", url)
     try {
       const info = await youtubedl(url, {
         dumpSingleJson: true,
         noCheckCertificate: true
       });
   
-      console.log("FORMATS: ", format)
       const format = info.formats.find(
         (f) => f.ext === 'mp4' && f.acodec !== 'none' && f.vcodec !== 'none'
       );
